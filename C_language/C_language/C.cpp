@@ -2,14 +2,13 @@
 
 int main()
 {
-	int a, b;
-	int sum;
+	float num1 = 0.1f;
 
-	a = 10;
-	b = 20;
+	double num2 = 3867.2158;
 
-	sum = a + b;
-	printf("sum = %d\n", sum);
+	long double num3 = 9.3275131;
+
+	printf("%f %f %lf", num1, num2, num3);
 
 	return 0;
 }
