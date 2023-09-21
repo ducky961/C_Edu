@@ -3,8 +3,12 @@
 int main(void)
 {
 
-	printf("Be Happy");		// Be Happy 출력
-	printf("My friend");	// My friend 출력
+	printf("Be Happy\n");		// Be Happy 출력
+	printf("My\tfriend\n");		// My friend 출력
 	
+	printf("Goot\bd\tchance\n");
+
+	printf("Cow\rW\a\n");
+
 	return 0;
 }
