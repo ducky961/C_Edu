@@ -2,6 +2,7 @@
 
 //	혼자 공부하는 C언어
 #pragma region Chapter.01 프로그램 만들기
+
 //	1강 컴파일러 사용법
 /*
 
@@ -41,6 +42,7 @@
 #pragma endregion
 
 #pragma region Chapter.02 상수와 데이터 출력
+
  //	2강 C 프로그램의 구조와 데이터 출력 방법
   /*
   
@@ -209,5 +211,221 @@
 		[ %d ]
 		[printf("이름 : %s\n", "홍길동");	]
 		[printf("학점 : %c",'A');			]
+*/
+
+#pragma endregion
+
+#pragma region Chapter.03 변수와 데이터 출력
+
+// 4강 변수
+/*
+* 
+	데이터의 종류에 따라 각각 다른 형태의 변수
+	정수 = int, 실수 = double, 문자 = char, 문자열 = char
+
+	*변수는 데이터를 저장하는 공간이다
+	
+	<변수 선언 방법>
+	int형 변수 선언
+	int a;			//int(자료형) a(변수명);
+
+	= 는 대입 연산자
+
+	*변수의 자료형이 같으면 동시에 둘 이상의 변수를 선언할 수 있다.
+	int a;
+	int b;		->		int a, b, c;
+	int c;
+
+	int a, b;
+	a = 10;		// 이 때 a는 저장 공간으로 사용하는 변수인 l-value
+	b = a;		// 이 때 a는 값으로 사용하는 변수인 r-value
+
+
+	<정수 자료형>
+	char		1바이트
+	short		2바이트
+	int			4바이트
+	long		4바이트
+	long long	8바이트
+
+
+	<unsigned 정수 자료형>
+	정수형을 양수 전용으로 쓰고 싶을때 사용
+
+	<실수 자료형>
+	float		유효 숫자 7
+	double		유효 숫자 15
+	long double	유효 숫자 15이상
+
+	*정수형을 기본으로 사용하고 꼭 필요한 경우에만 실수형을 사용
+	* 실수형은 유효 숫자가 많은 double형을 기본으로 사용
+	
+	<문자열 저장>
+	char fruit[6] = "apple"; // fruit(배열명) [6](문자열의 길이 +1 이상)
+	
+	*문자열의 길이보다 배열의 크기를 하나 더 크게 잡아야 하는 이유 : 
+	컴파일러가 문자열 끝에 \0(null 문자)을 자동으로 추가하기 때문
+
+	char 배열에 초기화 이외에 문자열을 저장할 때는 strcpy 함수를 사용
+	*strcpy 함수를 사용하려면 소스 코드에 string.h 헤더 파일을 포함
+	
+	===================================================================
+	[예시]
+	#include <stdio.h>
+	#include <string.h>				// 문자열을 다룰 수 있는 string.h 헤더 파일 포함
+
+	int main(void)
+	{
+		char fruit[20] = "strawberry";	// strawberry로 초기화 
+
+		printf("%s\n", fruit);			// strawberry 출력
+		strcpy(fruit,"banana");			// fruit에 banana 복사
+		printf("%s\n", fruit);			// banana 출력
+
+		return 0;
+	}
+
+	실행 결과
+	strawberry
+	banana
+	===================================================================
+
+	<const를 사용한 변수>
+	변수는 저장 공간이므로 언제든지 그 값을 바꿀 수 있다.
+	그러나 const를 사용한 변수는 예외
+
+	===================================================================
+	[예시]
+	#include<stdio.h>
+
+	int main(void)
+	{
+		int come = 0;							// 소득액 초기화
+		double tax;								// 세금
+		const double tax_rate = 0.12;			// 세율 초기화
+
+		income = 456;							// 소득액 저장
+		tax = income * tax_rate;				// 세금 계산
+		printf("세금은 : %.1lf입니다.\n",tax);
+
+		return 0;
+	}
+
+	실행 결과
+	세금은 : 54.7입니다.
+	===================================================================
+
+	<예약어와 식별어>
+	예약어 : 컴파일러와 사용 방법이 약속된 단어
+	식별자 : 필요에 따라 만들어 사용하는 단어
+	int age; // int(예약어) age(식별자)
+
+	*요약
+	변수 선언으로 메모리에 저장 공간을 확보하며, 대입 연산자(=)로
+	변숫값을 초기화하거나 저장한다. 초기화하지 않은 변수에는 쓰레기 값이 들어 있다.
+
+	변수의 형태를 자료형이라 하며 기본적으로 정수형과 실수형으로 나뉜다.
+
+	변수에 const를 사용하면 상수처럼 사용할 수 있다.
+
+	예약어는 컴파일러와 약속된 단어고, 식별자는 사용자가 만들어 낸 단어이다.
+	
+	[대표 자료형]
+	데이터 종류		자료형		크기(Byte)
+	정수			int			 4
+	실수			double		 8
+	문자			char		 1
+	문자열			char배열	가변적
+
+	[정수형의 종류]
+	자료형				크기	출력 변환 문자
+	char				1		%c 또는 %d
+	short				2		%d
+	int					4		%d
+	long				4		%ld
+	long long			8		%lld
+	unsigned char		1		%u
+	unsigned short		2		%u
+	unsigned int		4		%u
+	unsigned long		4		%lu
+	unsigned long long	8		%llu
+
+	[실수형의 종류]
+	자료형			크기		유효 숫자	출력 변환 문자
+	float			4			7			%f
+	double			8			15			%lf
+	long double		8이상		15이상		%Lf
+
+	[예약어의 종류]
+	자료형 : char, double, enum, float, int, long, short, signed, struct, union, unsigned, void
+	제어문 : break, case, continue, defalut, do, goto, if, return, switch, while
+	기억클래스 : auto, extern, register, static
+	기타 : const, sizeof, typedef, volatile
+
+*/
+
+// 4강 연습문제
+/*
+	1. 다음 자료형 중 실수형을 고르세요
+	float / long / char / double / int / unsigned / short
+
+	제출 답안 : long, double, unsigned
+	정답 : float, double
+
+	2. 다음 프로그램의 실행결과를 적으세요.
+	#include <stdio.h>
+	
+	int main(void)
+	{
+		int a = 0;
+
+		a = a+ 1;
+		a = a+ 2;
+		a = a+ 3;
+		printf("a : %d", a);
+
+		return 0;
+	}
+
+	제출 답안 : "a : 6"
+	정답 : "a : 6"
+
+	3. 국어, 영어, 수학 점수를 저장할 변수(kor, eng, mat)를 선언하고 각각 70, 80, 90점으로
+	초기화합니다. 총점을 저장할 변수(tot)를 선언해 세 과목의 합을 구하고 세 과목의 점수와
+	총점을 출력하는 프로그램을 작성하세요.
+	#include <stdio.h>
+
+	int main(void)
+	{
+		[			]	// 세 과목의 변수 선언과 초기화
+		[			]	// 총점을 저장할 변수 선언
+ 
+		[			]	// 세 변수의 값을 더해 총점 변수에 저장
+		[			]	// 점수 출력
+		[			]	// 총점 출력
+	}
+	실행결과 
+	국어 : 70, 영어 : 80, 수학 : 90
+	총점 : 240
+
+	제출 답안 : 
+	int kor, eng, mat;
+	kor = 70;
+	eng = 80;
+	mat = 90;
+	const double tot;
+
+	kor + eng + mat = tot;
+	printf("국어 : %d, 영어 : %d, 수학 : %d\n",kor, eng, mat);
+	printf("총점 : %d\n", tot)
+
+	정답 : 
+	int kor = 70, eng = 80, mat = 90;
+	int tot;
+
+	tot = kor + eng + mat;
+	printf("국어 : %d, 영어 : %d, 수학 : %d\n",kor, eng, mat);
+	printf("총점 : %d", tot)
+
 */
 #pragma endregion
